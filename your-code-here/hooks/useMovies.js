@@ -5,7 +5,8 @@ const cacheKey = "movies";
 export const useMovies = () => {
   const cachedMovies = JSON.parse(localStorage.getItem(cacheKey) || "[]");
   const [movies, setMovies] = useState(cachedMovies);
-  const [search, setSearch] = useState("");
+  const [searchString, setSearchString] = useState("");
+  const [searchYear, setSearchYear] = useState("");
 
   useEffect(() => {
     if (movies.length === 0) {
@@ -18,16 +19,29 @@ export const useMovies = () => {
     }
   }, [movies]);
 
+  const getMovies = () => {
+    let filteredMovies = movies;
+
+    if (searchYear) {
+      filteredMovies = filteredMovies.filter(
+        (m) => m.year.toString() === searchYear
+      );
+    }
+
+    if (searchString && searchString.length >= 2) {
+      filteredMovies = filteredMovies.filter((m) => {
+        const title = m.title.toLowerCase();
+        return title.includes(searchString.toLowerCase());
+      });
+    }
+
+    return filteredMovies;
+  };
+
   return {
-    movies:
-      search && search.length >= 2
-        ? movies.filter((m) => {
-            const title = m.title.toLowerCase();
-            if (title.includes(search.toLowerCase())) {
-              return true;
-            }
-          })
-        : movies,
-    setSearch,
+    movies: getMovies(),
+    setSearchString,
+    setSearchYear,
+    years: [...new Set(movies.map((m) => m.year))].sort((a, b) => b - a),
   };
 };
