@@ -1,6 +1,6 @@
 const { useEffect, useState } = React;
 
-const cacheKey = "movies";
+const cacheKey = "c-sardina-movies";
 
 export const useMovies = () => {
   const cachedMovies = JSON.parse(localStorage.getItem(cacheKey) || "[]");
@@ -13,8 +13,13 @@ export const useMovies = () => {
       fetch("/api/movies.json")
         .then((res) => res.json())
         .then((data) => {
-          setMovies(data);
-          localStorage.setItem(cacheKey, JSON.stringify(data));
+          const fixedMovies = data.map((m) => ({
+            ...m,
+            imageURL: m["cover-url"],
+          }));
+
+          setMovies(fixedMovies);
+          localStorage.setItem(cacheKey, JSON.stringify(fixedMovies));
         });
     }
   }, [movies]);

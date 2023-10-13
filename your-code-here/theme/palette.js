@@ -6,4 +6,7 @@ export const palette = {
   yellow: "#fbc531",
   blue: "#1e90ff",
   mustard: "#ff9f1a",
+  black: "#333",
+  gray: "#ccc",
+  blackRGBA: "rgba(255, 255, 255, 0.1)",
 };

@@ -1,17 +1,22 @@
 const { css } = emotion;
+import { palette } from "../theme/palette.js";
 
 const Select = css`
   flex: 1;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid ${palette.gray};
   border-radius: 5px;
   box-sizing: border-box;
-  color: #333;
+  color: ${palette.black};
 
   &:focus {
     outline: none;
-    border: 1px solid #aaa;
+    border: 1px solid ${palette.gray};
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;
 
