@@ -5,6 +5,7 @@ const cacheKey = "movies";
 export const useMovies = () => {
   const cachedMovies = JSON.parse(localStorage.getItem(cacheKey) || "[]");
   const [movies, setMovies] = useState(cachedMovies);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     if (movies.length === 0) {
@@ -18,6 +19,15 @@ export const useMovies = () => {
   }, [movies]);
 
   return {
-    movies,
+    movies:
+      search && search.length >= 2
+        ? movies.filter((m) => {
+            const title = m.title.toLowerCase();
+            if (title.includes(search.toLowerCase())) {
+              return true;
+            }
+          })
+        : movies,
+    setSearch,
   };
 };

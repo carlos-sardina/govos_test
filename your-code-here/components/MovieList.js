@@ -17,6 +17,7 @@ const Link = css`
 
 const Year = css`
   color: ${palette.blue};
+  margin-left: 5px;
 `;
 
 const getScoreColor = (score) => {
