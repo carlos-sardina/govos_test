@@ -2,19 +2,11 @@
 
 import "./tests.js";
 
-const { css } = emotion;
 const { useEffect } = React;
-
-const style = css`
-  text-align: center;
-`;
+import { Home } from "./pages/Home.js";
 
 export const App = ({ onLoad }) => {
   useEffect(onLoad, []); // to run tests
 
-  return html`
-    <p className=${style}>
-      (this file can be found at ./your-code-here/app.js)
-    </p>
-  `;
+  return html`<${Home} />`;
 };

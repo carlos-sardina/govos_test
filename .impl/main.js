@@ -11,11 +11,11 @@ const style = {
     display: grid;
     background: #f1f2f6;
     color: #000000;
-    border-radius: 5px;
-    justify-items: center;
-    align-items: center;
+    background: #2f3542;
     height: calc(100vh - 40px);
-    box-shadow: 2px 2px 2px #000000;
+    border-right: 1px solid #ffffff;
+    color: #ffffff;
+    overflow-y: auto;
   `,
   layout: css`
     display: grid;
